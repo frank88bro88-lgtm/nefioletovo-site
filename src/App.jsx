@@ -860,16 +860,184 @@ const styles = `
   }
 
   @media (max-width: 680px) {
-    .section { padding: 78px 0; }
-    .hero { padding-top: 110px; }
-    .service-grid, .benefit-grid, .gallery-grid, .reviews-grid, .stats, .mila-points, .academy-list { grid-template-columns: 1fr; }
-    .hero p { font-size: 17px; }
-    .video-cover { min-height: 430px; border-radius: 30px; }
-    .video-title { font-size: 46px; }
+    /* MOBILE FIX: на телефоне отключаем лишние всплывания и делаем меню читаемым */
+    .reveal,
+    .reveal.is-visible,
+    .reveal h1,
+    .reveal h2,
+    .reveal h3,
+    .reveal p,
+    .reveal .btn,
+    .reveal .stats div,
+    .reveal .mila-points div,
+    .reveal .academy-list div,
+    .reveal .benefit-emoji,
+    .reveal .brand-mark,
+    .reveal .video-label,
+    .reveal .service-row strong,
+    .reveal .stars,
+    .reveal .mini-label,
+    .reveal .popup-icon {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+      animation: none !important;
+      transition: none !important;
+      transition-delay: 0ms !important;
+    }
+
+    .service-card.reveal.is-visible,
+    .benefit-card.reveal.is-visible,
+    .gallery-card.reveal.is-visible,
+    .review-card.reveal.is-visible {
+      animation: none !important;
+      transform: none !important;
+    }
+
+    .service-card:hover,
+    .benefit-card:hover,
+    .gallery-card:hover,
+    .review-card:hover,
+    .btn:hover,
+    .gallery-card:hover .video-cover,
+    .service-card:hover .video-cover,
+    .benefit-card:hover .benefit-emoji {
+      transform: none !important;
+    }
+
+    .mobile-backdrop {
+      background: rgba(15, 0, 22, 0.82) !important;
+      backdrop-filter: none !important;
+    }
+
+    .mobile-menu {
+      background: #16001f !important;
+      color: #fff !important;
+      box-shadow: -24px 0 80px rgba(0,0,0,.45) !important;
+    }
+
+    .mobile-menu > button {
+      background: #fff !important;
+      color: #25002f !important;
+      border: 0 !important;
+    }
+
+    .mobile-top button {
+      background: rgba(255,255,255,.16) !important;
+      color: #fff !important;
+    }
+    body { background: #fff; }
+    .container { width: min(100% - 22px, 1180px); }
+    .section { padding: 66px 0; }
+
+    .header { height: 64px; padding-left: 12px; padding-right: 12px; }
+    .brand { gap: 9px; }
+    .brand-mark { width: 40px; height: 40px; border-radius: 15px; }
+    .brand strong { font-size: 11px; letter-spacing: .14em; }
+    .brand small { font-size: 10px; }
+    .menu-button { width: 42px; height: 42px; font-size: 20px; }
+    .mobile-menu { width: min(88vw, 330px); }
+
+    .hero { min-height: auto; padding-top: 92px; padding-bottom: 48px; }
+    .hero-grid { gap: 28px; }
+    .pill { font-size: 11px; line-height: 1.4; padding: 9px 12px; }
+    .hero h1 { font-size: clamp(43px, 14vw, 64px); line-height: .92; letter-spacing: -.055em; margin-top: 22px; }
+    .hero p { font-size: 15.5px; line-height: 1.62; margin-top: 20px; }
+    .hero-buttons { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 24px; }
+    .btn { width: 100%; min-height: 50px; padding: 14px 18px; }
+
+    .stats { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 24px; }
+    .stats div { border-radius: 20px; padding: 14px; }
+    .stats b { font-size: 22px; }
+    .stats small { font-size: 10px; }
+
+    .hero-visual { margin-top: 4px; }
+    .video-cover { min-height: 320px; border-radius: 28px; }
+    .video-cover.compact { min-height: 150px; border-radius: 22px; }
+    .video-content { padding: 22px; }
+    .video-label { font-size: 10px; letter-spacing: .13em; padding: 8px 11px; }
+    .video-title { font-size: 38px; line-height: .95; }
+    .video-content p { font-size: 13px; line-height: 1.55; }
     .floating-card { display: none; }
-    .floating-popup { left: 16px; right: 16px; bottom: 16px; }
-    .fixed-booking { display: inline-flex; }
-    .cursor-shadow { display: none; }
+
+    .section-head { margin-bottom: 34px; }
+    .section-head span, .mini-label { font-size: 10px; letter-spacing: .14em; padding: 8px 11px; }
+    .section-head h2, .mila-copy h2, .academy-copy h2, .contact-card h2 { font-size: clamp(31px, 9vw, 42px); line-height: 1; }
+    .section-head p, .mila-copy p, .academy-copy p, .contact-card p { font-size: 15.5px; line-height: 1.65; }
+
+    .service-grid, .benefit-grid, .gallery-grid, .reviews-grid, .mila-points, .academy-list { grid-template-columns: 1fr; }
+    .service-card { border-radius: 28px; padding: 10px; }
+    .service-video .video-cover { min-height: 145px; }
+    .service-body { padding: 16px 6px 6px; }
+    .service-row { align-items: center; }
+    .service-row h3 { font-size: 23px; }
+    .service-row strong {
+      opacity: 1 !important;
+      transform: none !important;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 92px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: #f3e8ff;
+      color: #6d28d9;
+      font-size: 12px;
+      line-height: 1.1;
+      text-align: center;
+      box-shadow: none;
+    }
+    .service-body p { font-size: 14px; margin-bottom: 12px; }
+
+    .service-video .video-cover.compact .video-title,
+    .gallery-card .video-cover.compact .video-title {
+      font-size: 26px;
+      transform: none !important;
+    }
+
+    .service-video .video-cover.compact .video-label,
+    .gallery-card .video-cover.compact .video-label {
+      display: none;
+    }
+
+    .benefit-card { border-radius: 26px; padding: 22px; }
+    .benefit-emoji { font-size: 28px; }
+    .benefit-card h3 { font-size: 21px; }
+
+    .two-col { gap: 30px; }
+    .mila-photo .video-cover, .contact-video .video-cover { min-height: 330px; }
+    .mila-points div { border-radius: 20px; padding: 15px; }
+
+    .gallery-card .video-cover { min-height: 180px; }
+    .lead-form, .contact-card { border-radius: 28px; padding: 22px; }
+    .lead-form h3 { font-size: 26px; }
+    .contact-buttons { display: grid; grid-template-columns: 1fr; }
+
+    .review-card { border-radius: 26px; padding: 22px; }
     .footer-inner { align-items: flex-start; flex-direction: column; }
+
+    .floating-popup { left: 11px; right: 11px; bottom: 78px; width: auto; padding: 14px; border-radius: 24px; }
+    .floating-popup b { font-size: 14px; padding-right: 34px; }
+    .floating-popup p { font-size: 12.5px; margin: 4px 0 8px; }
+    .popup-icon { width: 46px; height: 46px; border-radius: 16px; font-size: 20px; }
+    .popup-close { right: 10px; top: 10px; }
+
+    .modal-card { border-radius: 28px; padding: 20px; }
+    .modal-card h3 { font-size: 27px; margin-right: 40px; }
+    .modal-card .video-cover { min-height: 210px; }
+    .modal-actions { display: grid; grid-template-columns: 1fr; }
+
+    .fixed-booking {
+      display: flex;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      justify-content: center;
+      border-radius: 20px;
+      padding: 15px 18px;
+      background: linear-gradient(135deg, #7c1cff, #d946ef);
+      box-shadow: 0 18px 50px rgba(124,28,255,.32);
+    }
+    .cursor-shadow { display: none; }
   }
 `;
