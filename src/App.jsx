@@ -860,9 +860,21 @@ const styles = `
   }
 
   @media (max-width: 680px) {
-    /* MOBILE FIX: на телефоне отключаем лишние всплывания и делаем меню читаемым */
-    .reveal,
-    .reveal.is-visible,
+    /* MOBILE FIX: оставляем мягкие эффекты, но убираем прыгающие иконки/прайс */
+    .reveal {
+      opacity: 0 !important;
+      transform: translateY(18px) !important;
+      filter: none !important;
+      transition: opacity .55s ease, transform .55s cubic-bezier(.22,1,.36,1) !important;
+      transition-delay: var(--reveal-delay, 0ms) !important;
+    }
+
+    .reveal.is-visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+      filter: none !important;
+    }
+
     .reveal h1,
     .reveal h2,
     .reveal h3,
@@ -870,7 +882,12 @@ const styles = `
     .reveal .btn,
     .reveal .stats div,
     .reveal .mila-points div,
-    .reveal .academy-list div,
+    .reveal .academy-list div {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+
     .reveal .benefit-emoji,
     .reveal .brand-mark,
     .reveal .video-label,
@@ -880,18 +897,20 @@ const styles = `
     .reveal .popup-icon {
       opacity: 1 !important;
       transform: none !important;
-      filter: none !important;
-      animation: none !important;
       transition: none !important;
-      transition-delay: 0ms !important;
     }
 
     .service-card.reveal.is-visible,
     .benefit-card.reveal.is-visible,
     .gallery-card.reveal.is-visible,
     .review-card.reveal.is-visible {
-      animation: none !important;
-      transform: none !important;
+      animation: mobileSoftPop .48s ease-out both !important;
+      animation-delay: var(--reveal-delay, 0ms) !important;
+    }
+
+    @keyframes mobileSoftPop {
+      0% { opacity: 0; transform: translateY(18px) scale(.985); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .service-card:hover,
@@ -905,21 +924,38 @@ const styles = `
       transform: none !important;
     }
 
+    .video-layer.one { animation-duration: 10s; }
+    .video-layer.two { animation-duration: 11s; }
+    .video-layer.three { animation-duration: 9s; }
+
     .mobile-backdrop {
       background: rgba(15, 0, 22, 0.82) !important;
-      backdrop-filter: none !important;
+      backdrop-filter: blur(4px) !important;
     }
 
     .mobile-menu {
       background: #16001f !important;
       color: #fff !important;
       box-shadow: -24px 0 80px rgba(0,0,0,.45) !important;
+      animation: mobileMenuIn .28s ease-out both;
+    }
+
+    @keyframes mobileMenuIn {
+      from { transform: translateX(18px); opacity: .75; }
+      to { transform: translateX(0); opacity: 1; }
     }
 
     .mobile-menu > button {
       background: #fff !important;
       color: #25002f !important;
       border: 0 !important;
+    }
+
+    .mobile-menu > button:active,
+    .btn:active,
+    .service-card:active,
+    .gallery-card:active {
+      transform: scale(.985) !important;
     }
 
     .mobile-top button {
